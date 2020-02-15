@@ -1,11 +1,9 @@
-require "redis"
-
-r = Redis.new
+HITS = 0
 
 app = lambda do |env|
-  r.incr "hits"
+  HITS += 1
 
-  [200, {"Content-Type" => "text/plain"}, ["Hits: #{r.get "hits"}\n"]]
+  [200, {"Content-Type" => "text/plain"}, ["Hits: #{HITS}\n"]]
 end
 
 run app
